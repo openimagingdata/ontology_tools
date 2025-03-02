@@ -1,2 +1,7 @@
 # ontology_tools
-Library for finding and searching standard ontologies
+
+Current ontologies are:
+
+- [Anatomic Location](https://anatomiclocations.org)
+- [SNOMED-CT](https://www.snomed.org)
+- [RadLex](https://www.radlex.org)
