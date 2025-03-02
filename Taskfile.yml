@@ -1,0 +1,19 @@
+version: '3'
+
+tasks:
+  lint:
+    desc: Check code with ruff (linting and formatting)
+    cmds:
+      - ruff check ./src
+      - ruff format --check ./src
+
+  lint-fix:
+    desc: Fix code issues with ruff (linting and formatting)
+    cmds:
+      - ruff check --fix ./src
+      - ruff format ./src
+
+  test:
+    desc: Run test with pytest
+    cmds:
+      - pytest ./test

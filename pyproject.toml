@@ -1,0 +1,22 @@
+[project]
+name = "ontology-tools"
+version = "0.1.0"
+description = "Representations of ontology system for medical imaging informatics."
+readme = "README.md"
+authors = [
+    { name = "Tarik Alkasab", email = "tarik@alkasab.org" },
+    { name = "Maya Caskey", email = "mayaicaskey@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "pytest>=8.3.5",
+    "ruff>=0.9.9",
+]
