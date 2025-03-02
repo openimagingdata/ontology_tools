@@ -8,7 +8,10 @@ authors = [
     { name = "Maya Caskey", email = "mayaicaskey@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "motor>=3.7.0",
+    "python-dotenv>=1.0.1",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -16,6 +19,7 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "jupyter>=1.1.1",
     "mypy>=1.15.0",
     "pytest>=8.3.5",
     "ruff>=0.9.9",
