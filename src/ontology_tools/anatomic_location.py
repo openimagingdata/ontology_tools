@@ -5,11 +5,10 @@ from annotated_types import MinLen
 from pydantic import BaseModel, BeforeValidator, ConfigDict, Field
 from pydantic.alias_generators import to_camel
 
-from .concept import Code as CodedConcept
-from .concept import Concept
+from .common import Code 
 
 
-def check_anatomic_location_id(v: str):
+def check_anatomic_location_id(v: str) -> str:
     v = v.strip()
     match = re.match(r"^RID\d{2,}(_RID\d{2,})*$", v)
     if not match:
@@ -17,7 +16,7 @@ def check_anatomic_location_id(v: str):
     return v
 
 
-def check_numeric_string(v: str):
+def check_numeric_string(v: str) -> str:
     v = v.strip()
     match = re.match(r"^\d{3,}$", v)
     if not match:
@@ -25,7 +24,7 @@ def check_numeric_string(v: str):
     return v
 
 
-def check_compound_numeric_string(v: str):
+def check_compound_numeric_string(v: str) -> str:
     v = v.strip()
     match = re.match(r"^\d{3,}(_\d{3,})*$", v)
     if not match:
@@ -50,14 +49,6 @@ class AnatomicLocationRef(BaseModel):
     display: NonEmptyString | None = None
 
 
-class Code(BaseModel):
-    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True, validate_assignment=True)
-
-    system: NonEmptyString
-    code: NonEmptyString
-    display: NonEmptyString | None = None
-
-
 # Define a Link class that inherits from BaseModel and has a site field which is a NonEmptyString
 # and a url field which is a string which must be a URL
 class Link(BaseModel):
@@ -65,7 +56,7 @@ class Link(BaseModel):
     url: str = Field(pattern=r"^https?://")
 
 
-class AnatomicLocation(Concept):
+class AnatomicLocation(BaseModel):
     model_config = ConfigDict(
         alias_generator=to_camel,
         populate_by_name=True,
@@ -100,5 +91,5 @@ class AnatomicLocation(Concept):
             out += f" (synonyms: {'; '.join(self.synonyms)})"
         return out
 
-    def to_system_code_display(self) -> CodedConcept:
-        return CodedConcept(self.SYSTEM_NAME, self.id, self.description)
+    def to_system_code_display(self) -> Code:
+        return Code(self.SYSTEM_NAME, self.id, self.description)
