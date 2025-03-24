@@ -5,7 +5,7 @@ from annotated_types import MinLen
 from pydantic import BaseModel, BeforeValidator, ConfigDict, Field
 from pydantic.alias_generators import to_camel
 
-from .common import Code 
+from .common import Code
 
 
 def check_anatomic_location_id(v: str) -> str:
@@ -65,6 +65,7 @@ class AnatomicLocation(BaseModel):
 
     SYSTEM_NAME: ClassVar[str] = "ANATOMICLOCATIONS"
 
+    id: str = Field(alias="_id")
     acr_common_id: NumericString | None = None
     snomed_id: CompoundNumericString | None = None
     snomed_display: NonEmptyString | None = None
