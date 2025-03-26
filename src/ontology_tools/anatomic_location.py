@@ -84,7 +84,7 @@ class AnatomicLocation(BaseModel):
     codes: Annotated[list[Code], MinLen(1)] | None = None
     links: Annotated[list[Link], MinLen(1)] | None = None
 
-    def text_for_embedding(self) -> str:
+    def summary_text(self) -> str:
         out = self.description
         if self.definition:
             out += f" Definition: {self.definition}"

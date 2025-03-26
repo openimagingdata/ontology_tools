@@ -39,7 +39,7 @@ class SnomedCTConcept(BaseModel):
     case_significance: CaseSignificance
     definitions: list[str] | None = None
 
-    def text_for_embedding(self) -> str | None:
+    def summary_text(self) -> str | None:
         """Combine preferred term, alternate terms,
         and definition into a single text string.
         """
